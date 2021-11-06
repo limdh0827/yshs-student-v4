@@ -1,8 +1,10 @@
+import UserCard from "../components/home/UserCard";
+
 const Home = () => {
   return (
-    <div>
-      <h1 className="text-red-500 font-sans">home</h1>
-    </div>
+    <main className="relative">
+      <UserCard />
+    </main>
   );
 };
 
