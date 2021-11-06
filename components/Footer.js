@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <div className="mt-32 mb-5 mx-auto w-full border-t pt-4">
+    <div className="mt-5 mb-5 mx-auto w-full border-t pt-4">
       <div className="flex flex-col w-full justify-center items-center">
         <div className="flex">
           <p className="mr-1">유성고등학교 by 비트코딩 동아리</p>
