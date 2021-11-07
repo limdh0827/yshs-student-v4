@@ -35,7 +35,7 @@ const DietCard = () => {
   );
 
   return (
-    <div className="mx-auto w-full rounded-lg">
+    <div className="mx-auto w-full rounded-lg bg-gray-50 p-3">
       <div className="flex w-full justify-between items-center pb-2 border-b">
         <div className="flex justify-center items-center space-x-1">
           <MdRestaurantMenu />
