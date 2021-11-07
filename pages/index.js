@@ -1,5 +1,6 @@
 import UserCard from "../components/home/UserCard";
 import DietCard from "../components/home/DietCard";
+import DDayCard from "../components/home/DDayCard";
 
 const Home = () => {
   return (
@@ -7,6 +8,8 @@ const Home = () => {
       <UserCard />
 
       <DietCard />
+
+      <DDayCard />
     </main>
   );
 };
