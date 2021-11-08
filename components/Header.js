@@ -1,11 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const truncate = (str, n) => {
-  return str.length > n ? str.substr(0, n - 1) + "..." : str;
-};
+const Header = ({ pathname }) => {
+  const headerTitle = () => {
+    switch (pathname) {
+      case "/":
+        return "유성고등학교 학생";
 
-const Header = () => {
+      case "/chat":
+        return "채팅";
+
+      case "/user":
+        return "사용자 설정";
+    }
+  };
+
   return (
     <header className="relative w-full px-5 z-50 shadow-md">
       <div className="mx-auto py-1">
@@ -21,7 +30,7 @@ const Header = () => {
                     width="34"
                   />
                   <h1 className="text-2xl font-bold cursor-pointer">
-                    유성고등학교
+                    {headerTitle()}
                   </h1>
                 </div>
               </a>

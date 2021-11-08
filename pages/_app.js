@@ -2,10 +2,11 @@ import Head from "next/head";
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import Layout from "../components/Layout";
+import { AuthProvider } from "../context/AuthContext";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <AuthProvider>
       <Head>
         <meta
           name="viewport"
@@ -16,7 +17,7 @@ function MyApp({ Component, pageProps }) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </>
+    </AuthProvider>
   );
 }
 

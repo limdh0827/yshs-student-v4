@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header />
+      <Header pathname={pathname} />
       <Tabbar pathname={pathname} />
 
       <div className="p-5 pb-24">
