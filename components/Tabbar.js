@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MdChat, MdHomeFilled, MdPeopleAlt } from "react-icons/md";
+import { MdChat, MdHomeFilled, MdPerson } from "react-icons/md";
 
 const Tabbar = ({ pathname }) => {
   const TabbarLink = ({ icon, href }) => {
@@ -24,7 +24,7 @@ const Tabbar = ({ pathname }) => {
 
       <TabbarLink icon={<MdChat />} href="/chat" />
 
-      <TabbarLink icon={<MdPeopleAlt />} href="/credit" />
+      <TabbarLink icon={<MdPerson />} href="/user" />
     </nav>
   );
 };
