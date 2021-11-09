@@ -4,18 +4,24 @@ import Image from "next/image";
 import { format as fnsFormat, getDay } from "date-fns";
 import ko from "date-fns/locale/ko";
 import { MdLogin, MdOpenInNew } from "react-icons/md";
+import Loading from "react-loading";
 
 const days = ["일", "월", "화", "수", "목", "금", "토"];
 
 const UserCard = () => {
-  const { user, signIn, signOut } = useAuth();
+  const { user, loading, signIn, signOut } = useAuth();
 
   return (
     <div className="mx-auto w-full p-5 rounded-lg flex justify-between bg-gray-50">
       <div className="flex justify-between items-center">
-        {user ? (
+        {loading ? (
+          <div className="flex justify-center items-center">
+            <Loading type="spokes" color="#000" width="40px" className="pt-3" />
+          </div>
+        ) : user ? (
           <>
             <div className="mr-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={user.photoURL}
                 alt={user.displayName}

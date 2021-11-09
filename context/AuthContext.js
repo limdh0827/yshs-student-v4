@@ -9,18 +9,22 @@ import { auth } from "../lib/firebase";
 
 const provider = new GoogleAuthProvider();
 provider.addScope("email");
+provider.addScope("profile");
 provider.setCustomParameters({
   hd: "yshs.djsch.kr",
+  prompt: "select_account",
 });
 
 const AuthContext = createContext({
   user: null,
+  loading: Boolean,
   signIn: () => {},
   signOut: () => {},
 });
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -29,6 +33,7 @@ export const AuthProvider = ({ children }) => {
       } else {
         setUser(null);
       }
+      setLoading(false);
     });
 
     return unsubscribe;
@@ -67,6 +72,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        loading,
         signIn,
         signOut,
       }}
