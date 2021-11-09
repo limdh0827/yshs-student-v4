@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Router from "next/router";
 import axios from "axios";
 import useSWR from "swr";
@@ -34,6 +35,25 @@ const DietCard = () => {
     fetcher(url, targetDate)
   );
 
+  const [fHeight, setFHeight] = useState("");
+
+  useEffect(() => {
+    const lunchH = document.getElementById("lunch")?.clientHeight;
+    const dinnerH = document.getElementById("dinner")?.clientHeight;
+
+    if (lunchH && !dinnerH) {
+      setFHeight(`${lunchH}px`);
+    } else if (!lunchH && dinnerH) {
+      setFHeight(`${dinnerH}px`);
+    } else {
+      setFHeight("50px");
+    }
+  }, [diet]);
+
+  const fallbackStyle = {
+    height: fHeight,
+  };
+
   return (
     <div className="mx-auto w-full rounded-lg bg-gray-50 p-3">
       <div className="flex w-full justify-between items-center pb-2 border-b">
@@ -58,7 +78,10 @@ const DietCard = () => {
         >
           <SwiperSlide>
             {diet.isLunchServed ? (
-              <div className="flex flex-col items-start justify-center mt-2">
+              <div
+                id="lunch"
+                className="flex flex-col items-start justify-center mt-2"
+              >
                 <div className="flex w-full justify-between mb-2">
                   <div className="flex justify-center items-center space-x-1 text-2xl">
                     <MdLunchDining />
@@ -78,7 +101,11 @@ const DietCard = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex justify-center items-center space-x-1 text-xl mt-5">
+              <div
+                id="lunchFallback"
+                className="flex justify-center items-center space-x-1 text-xl mt-3"
+                style={fallbackStyle}
+              >
                 <MdLunchDining />
                 <p>{formattedDate} 중식은 없습니다.</p>
               </div>
@@ -87,7 +114,10 @@ const DietCard = () => {
 
           <SwiperSlide>
             {diet.isDinnerServed ? (
-              <div className="flex flex-col items-start justify-center mt-2">
+              <div
+                id="dinner"
+                className="flex flex-col items-start justify-center mt-2"
+              >
                 <div className="flex w-full justify-between mb-2">
                   <div className="flex justify-center items-center space-x-1 text-2xl">
                     <MdDinnerDining />
@@ -107,7 +137,11 @@ const DietCard = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex justify-center items-center space-x-1 text-xl mt-5 ">
+              <div
+                id="dinnerFallback"
+                className="flex justify-center items-center space-x-1 text-xl mt-3"
+                style={fallbackStyle}
+              >
                 <MdDinnerDining />
                 <p>{formattedDate} 석식은 없습니다.</p>
               </div>
