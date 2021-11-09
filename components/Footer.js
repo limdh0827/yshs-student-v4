@@ -1,9 +1,14 @@
 import Image from "next/image";
+import packageInfo from "../package.json";
 
 const Footer = () => {
   return (
     <div className="mt-5 mb-5 mx-auto w-full border-t pt-4">
       <div className="flex flex-col w-full justify-center items-center">
+        <p>
+          {process.env.NODE_ENV === "development" ? "Dev mode" : "Production"} -{" "}
+          {packageInfo.version}
+        </p>
         <div className="flex">
           <p className="mr-1">유성고등학교 by 비트코딩 동아리</p>
           <Image
