@@ -3,8 +3,23 @@ import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
 import Layout from "../components/Layout";
 import { AuthProvider } from "../context/AuthContext";
+import { isIOS, isMobileSafari, isAndroid } from "react-device-detect";
+import { useEffect, useState } from "react";
+import Install from "./install";
+import Unavailable from "./unavailable";
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
+  const [standalone, setStandalone] = useState();
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (window.matchMedia("(display-mode: standalone)").matches) {
+        setStandalone(true);
+      } else {
+        setStandalone(false);
+      }
+    }
+  }, []);
+
   return (
     <AuthProvider>
       <Head>
@@ -14,11 +29,18 @@ function MyApp({ Component, pageProps }) {
         />
         <title>유성고등학교</title>
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+
+      {standalone ? (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      ) : (isIOS && isMobileSafari) || isAndroid ? (
+        <Install />
+      ) : (
+        <Unavailable />
+      )}
     </AuthProvider>
   );
-}
+};
 
 export default MyApp;
