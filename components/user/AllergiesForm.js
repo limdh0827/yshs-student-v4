@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import { setUserDb, getAllergies } from "../../lib/db";
 
 const AllergiesForm = ({ uid }) => {
-  const [initialValues, setInitialValues] = useState([]);
+  const [initialAl, setInitialAl] = useState([]);
 
   useEffect(() => {
+    // TODO - SSR 비교
     getAllergies(uid).then((result) => {
-      setInitialValues(result);
+      setInitialAl(result);
     });
   }, [uid]);
 
@@ -20,18 +20,11 @@ const AllergiesForm = ({ uid }) => {
       </div>
 
       <Formik
-        initialValues={{ al: initialValues }}
+        initialValues={{ al: initialAl }}
         enableReinitialize={true}
         onSubmit={async (values) => {
-          await axios({
-            method: "POST",
-            url: "/api/db/user",
-            data: {
-              uid,
-              userData: {
-                allergies: values.al,
-              },
-            },
+          setUserDb(uid, {
+            allergies: values.al,
           }).then(() => alert("저장되었습니다."));
         }}
       >
