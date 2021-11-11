@@ -2,7 +2,7 @@ import { useAuth } from "../context/AuthContext";
 import GoogleButton from "react-google-button";
 import Loading from "react-loading";
 import GoogleUser from "../components/user/GoogleUser";
-import Preferences from "../components/user/Preferences";
+import AllergiesForm from "../components/user/AllergiesForm";
 
 const User = () => {
   const { user, loading, signIn, signOut } = useAuth();
@@ -18,43 +18,10 @@ const User = () => {
 
   if (user) {
     return (
-      <div className="flex flex-col justify-center items-center space-y-5">
+      <div className="flex flex-col justify-center items-center space-y-8">
         <GoogleUser user={user} signOut={signOut} />
 
-        <Preferences />
-
-        {/* <table className="table-auto border-collapse border w-full">
-          <tbody>
-            <tr>
-              <th className="border">상태</th>
-              <th className="border">로그인 됨 ✅</th>
-            </tr>
-
-            <tr>
-              <th className="border">계정</th>
-              <th className="border">{user.email}</th>
-            </tr>
-
-            <tr>
-              <th className="border">계정 이름</th>
-              <th className="border">{user.displayName}</th>
-            </tr>
-
-            <tr>
-              <th className="border">알레르기 정보</th>
-              <th className="border">
-                <button className="bg-yellow-300 rounded-full text-sm px-3">
-                  <p>알레르기 설정</p>
-                </button>
-              </th>
-            </tr>
-
-            <tr>
-              <th className="border">상태</th>
-              <th className="border">로그인 됨 ✅</th>
-            </tr>
-          </tbody>
-        </table> */}
+        <AllergiesForm uid={user.uid} />
       </div>
     );
   }

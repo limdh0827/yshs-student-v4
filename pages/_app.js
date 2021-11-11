@@ -20,6 +20,8 @@ const MyApp = ({ Component, pageProps }) => {
     }
   }, []);
 
+  const isDev = process.env.NODE_ENV === "development";
+
   return (
     <AuthProvider>
       <Head>
@@ -30,7 +32,11 @@ const MyApp = ({ Component, pageProps }) => {
         <title>유성고등학교</title>
       </Head>
 
-      {standalone ? (
+      {isDev ? (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      ) : standalone ? (
         <Layout>
           <Component {...pageProps} />
         </Layout>

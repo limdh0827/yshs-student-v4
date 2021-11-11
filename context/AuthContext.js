@@ -53,14 +53,21 @@ export const AuthProvider = ({ children }) => {
         }
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const userEmail = error.email;
-        const cred = GoogleAuthProvider.credentialFromError(error);
+        switch (error.code) {
+          case "auth/cancelled-popup-request":
+            return alert("요청이 취소되었습니다. 다시 시도해주세요.");
 
-        console.error(errorMessage);
+          case "auth/popup-blocked":
+            return alert(
+              "팝업이 차단되었습니다. 브라우저 설정을 확인해주세요."
+            );
 
-        alert(`인증 오류: ${errorMessage}`);
+          case "auth/popup-closed-by-user":
+            return alert("요청이 취소되었습니다. 다시 시도해주세요.");
+
+          default:
+            return alert("오류가 발생했습니다. 다시 시도해주세요.");
+        }
       });
   };
 
