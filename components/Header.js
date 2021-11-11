@@ -12,6 +12,9 @@ const Header = ({ pathname }) => {
 
       case "/user":
         return "사용자 설정";
+
+      default:
+        return "유성고등학교 학생";
     }
   };
 
